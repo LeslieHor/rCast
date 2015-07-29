@@ -1,0 +1,37 @@
+body
+{
+	font-size: 26px;
+    margin: 0 auto;
+	background: #285C68
+}
+
+.podcast
+{
+	font-weight: 700;
+	font-size: 30px;
+	background: #154652;
+}
+
+.episode
+{
+}
+
+.current_track
+{
+	font-weight: 700;
+	font-size: 20px;
+}
+
+.player_container
+{
+	position: relative:
+}
+
+.player
+{
+	position: absolute;
+	bottom: 0;
+	background: #052E37;
+	width: 100%;
+	text-align: center;
+}
