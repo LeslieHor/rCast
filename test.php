@@ -4,7 +4,6 @@ ini_set('display_startup_errors',1);
 error_reporting(-1);
 
 include_once('common.php');
-//include_once('podcasts/get_podcasts.php');
 echo "Worked";
 
 update_feed('http://feed.thisamericanlife.org/talpodcast?format=xml');
@@ -19,24 +18,13 @@ function update_feed($url)
 	$podcasts = [];
 	$podcasts["podcasts"] = [];
 	
-	$podcast = [];
-	$podcast["name"] = $feed->get_title();
-	$podcast["url"] = $url;
-	$podcast["md5"] = md5($url);
+	$podcast = podcast($feed, $url);
 	
 	$episodes = [];
 	
 	foreach ($feed->get_items() as $item)
 	{
-		$title = $item->get_title();
-		$link = $item->get_link();
-		$publish_date = $item->get_date();
-		$md5 = md5($link);
-		$status = 0; // FOR TESTING
-		$enclosure = $item->get_enclosure();
-		$download_url = $enclosure->get_link();
-		
-		array_push($episodes, episode($title, $download_url, $publish_date, $md5, $status));
+		array_push($episodes, episode($item));
 	}
 	
 	$podcast["episodes"] = $episodes;
@@ -46,13 +34,26 @@ function update_feed($url)
 	return;
 }
 
-function episode($title, $download_url, $publish_date, $md5, $status){
+function podcast($feed, $url){
+	$podcast = [];
+	$podcast["name"] = $feed->get_title();
+	$podcast["description"] = $feed->get_description();
+	$podcast["url"] = $url;
+	$podcast["md5"] = md5($url);
+	
+	return $podcast;
+}
+
+function episode($item){
 	$new_episode = [];
-	$new_episode["title"] = $title;
-	$new_episode["download_url"] = $download_url;
-	$new_episode["publish_date"] = $publish_date;
-	$new_episode["md5"] = $md5;
-	$new_episode["status"] = $status;
+	$new_episode["title"] = $item->get_title();
+	$enclosure = $item->get_enclosure();
+	$new_episode["download_url"] = $enclosure->get_link();
+	$new_episode["publish_date"] = $item->get_date();
+	$new_episode["md5"] = md5($enclosure->get_link());
+	$new_episode["status"] = 0;
+	$new_episode["total_time"] = $enclosure->get_duration();
+	$new_episode["extension"] = pathinfo($enclosure->get_link(), PATHINFO_EXTENSION);
 	
 	return $new_episode;
 }

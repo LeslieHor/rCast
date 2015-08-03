@@ -1,44 +1,22 @@
-body
-{
-	font-size: 26px;
-    margin: 0 auto;
-	background: #285C68
+body {
+	padding-top: 50px;
+	padding-bottom: 200px;
 }
-
-.podcast
-{
-	font-weight: 700;
-	font-size: 30px;
-	background: #154652;
-}
-
-.episode
-{
-	font-size: 16px;
-}
-
-.current_track
-{
-	font-weight: 700;
-	font-size: 20px;
-}
-
-.player_container
-{
-	/*position: relative;*/
-   position:fixed;
-   left:0px;
-   bottom:0px;
-   height:30px;
-   width:100%;
-   background:#999;
-}
-
-.player
-{
-	position: absolute;
-	bottom: 0;
-	background: #052E37;
-	width: 100%;
+.starter-template {
+	padding: 40px 15px;
 	text-align: center;
+}
+.player_container {
+	text-align: center;
+}
+.audio_player {
+	width: 100%;
+}
+.odd
+{
+	background: #fdefd6;
+}
+.even
+{
+	background: #fbc4b4;
 }

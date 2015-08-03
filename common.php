@@ -3,27 +3,24 @@ ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(-1);
 
-$root_path = getcwd();
+$root_path = getcwd() . '/';
+$podcast_file_path = $root_path . 'podcasts/podcast_files/';
+$podcast_data_path = $root_path . 'podcasts/podcast_data/';
 
 // Loading in simplepie
 include_once($root_path . '/libs/simplepie/autoloader.php');
 
-// Save an xml object as an xml file in the location requested
-function save_xml($xml, $path){
-	$dom = new DOMDocument('1.0');
-	$dom->preserveWhiteSpace = false;
-	$dom->formatOutput = true;
-	$dom->loadXML($xml->asXML());
-	$new_xml = $dom->saveXML();
-	
-	$my_file = ($GLOBALS['root_path'] . $path);
-	$fh = fopen($my_file, 'w') or die("can't open file");
-	fwrite($fh, $new_xml);
-	fclose($fh);
-}
+// Loading in the podcast manager libraries.
+include_once($root_path . '/libs/podcast_manager/fetch_podcasts.php');
 
-// Loads in a simplepie object to parse rss feeds
-function load_feed_xml($url){
+//test
+echo 'testing';
+update_feed('http://feed.thisamericanlife.org/talpodcast?format=xml');
+echo 'testing2';
+
+// Loads in a simplepie object to parse RSS feeds
+function load_feed_xml($url)
+{
 	$feed = new SimplePie();
 	$feed->set_feed_url($url);
 	$feed->init();
@@ -33,11 +30,16 @@ function load_feed_xml($url){
 	return $feed;
 }
 
-// Load in a plain XML file
-function load_xml($path){
-	$feed = file_get_contents($GLOBALS['root_path'] . $path);
-	$xml = simplexml_load_string($feed);
-	return $xml;
+// Loads in the JSON data
+function load_json_data($local_path)
+{
+	$json_data = json_decode(file_get_contents($local_path), true);
+	return $json_data;
 }
 
+// Saves the data as a JSON file
+function save_json_data($json_data, $path)
+{
+	file_put_contents($path, json_encode($json_data));
+}
 ?>
