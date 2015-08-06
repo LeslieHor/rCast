@@ -7,16 +7,26 @@ body {
 	text-align: center;
 }
 .player_container {
+	padding: 10px;
 	text-align: center;
 }
 .audio_player {
 	width: 100%;
+	display: none;
 }
-.odd
-{
+.odd {
 	background: #fdefd6;
 }
-.even
-{
+.even {
 	background: #fbc4b4;
+}
+.player_control_img {
+	width: 64px;
+	height: 64px;
+}
+.player_control{
+
+}
+.show{
+	font-size: 50px;
 }

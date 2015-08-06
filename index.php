@@ -18,6 +18,9 @@
     <!-- Custom styles for this template -->
     <link href="style.css" rel="stylesheet">
 	
+	
+	<script src="libs/podcast_manager/js/player_controls.js"></script>
+	
   </head>
 
   <body>
@@ -36,8 +39,16 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a id="update_all" href="javascript:void(0);">Update All</a></li>
+            <li><a id="refresh_data" href="javascript:void(0);">Refresh Data</a></li>
+            <li
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Podcast URL">
+					</div>
+					<button type="add" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span></button>
+				</form>
+			</li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -46,23 +57,24 @@
     <div class="container">
 		<div class="main-content" ng-app="myApp" ng-controller="myCtrl" >
 			<!-- Shows the currently playing track -->
-			<div class="current_track">Currently Playing: {{ current_track }}</div>
+			<!--<div class="current_track">Currently Playing: {{ current_track }}</div>-->
 			
 			<!-- Lists all the podcasts and their shows -->
-			<div ng-repeat="x in podcasts">
-				<div class="podcast">
-				{{ x.name + " - " + (x.total_episodes + 1) }}
-				</div>
-				<div class="episode" ng-repeat="y in x.episodes">
-				<!-- Alternate row colours by changing the class if it's odd or if it's even -->
-				<div ng-class-odd="'odd'" ng-class-even="'even'">
-					<div class="title">{{ y.title }}</div>
-					<div class="status">{{ y.status }}</div>
-					<div class="status"><a href="{{ y.download_url }}">DOWNLOAD</a></div>
-					<div class="time">{{ y.bookmark }} / {{ y.total_time | secondsToDateTime | date:'HH:mm:ss' }}</div>
-					<div class="size">{{ y.size }}</div>
-					<div class="publish_date">{{ y.publish_date }}</div>
-				</div>
+			<div>
+				<div class="podcasts" ng-repeat="podcast in podcasts">
+					{{ podcast.name + " - " + podcast.url }}
+					<button type="button" class="btn btn-default" ng-click="load_episodes(podcast)">Load</button>
+					<div class="episode" ng-repeat="y in podcast.episodes" ng-class="show"">
+						<!-- Alternate row colours by changing the class if it's odd or if it's even -->
+						<div ng-class-odd="'odd'" ng-class-even="'even'">
+							<div class="title">{{ y.title }}</div>
+							<div class="status">{{ y.status }}</div>
+							<div class="status"><a href="{{ y.download_url }}">DOWNLOAD</a></div>
+							<div class="time">{{ y.bookmark }} / {{ y.total_time | secondsToDateTime | date:'HH:mm:ss' }}</div>
+							<div class="size">{{ y.size }}</div>
+							<div class="publish_date">{{ y.publish_date }}</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			
@@ -70,22 +82,22 @@
 
     </div><!-- /.container -->
 	
+	<!-- Footer containing the audio player -->
 	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 		<div class="container">
 		<!-- Floating player controls at the botttom of the page -->
 			<div class="player_container">
-				<div class="player">
-					<div class="audio_player">
-						<audio class="audio_player" id="audio_player" src="./podcasts/podcast_files/this_american_life/20150727_443_amusement_park.mp3" preload="auto" controls ontimeupdate="update_time();">
-							<p>Your browser does not support the audio element</p>
-						</audio>
-					</div>
-					<div class="player_controls">
-						<span class="player_control"><a href="javascript:void(0);" onclick=""><img class="player_control_img" src="./imgs/prev.png"></a></span>
-						<span class="player_control"><a href="javascript:void(0);" onclick="togglePlayState()"><img class="player_control_img" id="play_pause_img" src="./imgs/play.png"></a></span>
-						<span class="player_control"><a href="javascript:void(0);" onclick=""><img class="player_control_img" src="./imgs/next.png"></a></span>
-						<!--<span class="player_control">Mute</span>-->
-					</div>
+				<div class="audio_player">
+					<audio class="audio_player" id="audio_player" src="./podcasts/podcast_files/this_american_life/20150727_443_amusement_park.mp3" preload="auto" controls ontimeupdate="update_time();">
+						<p>Your browser does not support the audio element</p>
+					</audio>
+				</div>
+				<div class="player_controls">
+					<button type="button" class="btn btn-default btn-lg" onclick=""><span id="prev" class="glyphicon glyphicon-fast-backward"></span></button>
+					<button type="button" class="btn btn-default btn-lg" onclick="togglePlayState()"><span id="play_pause" class="glyphicon glyphicon-play"></span></button>
+					<button type="button" class="btn btn-default btn-lg" onclick=""><span id="play_pause" class="glyphicon glyphicon-fast-forward"></span></button>
+					
+					<button type="button" class="btn btn-default btn-lg" onclick="$('.audio_player').toggle();"><span id="toggle_audio_control_visibility" class="glyphicon glyphicon-chevron-up"></span></button>
 				</div>
 			</div>
 		</div>
@@ -97,7 +109,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="libs/bootstrap/js/bootstrap.min.js"></script>
-	<script src="app.js"></script>
-	<script src="player_controls.js"></script>
+	<script src="libs/podcast_manager/js/app.js"></script>
+	<script src="libs/podcast_manager/js/data_handler.js"></script>
   </body>
 </html>

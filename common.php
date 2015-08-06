@@ -6,17 +6,19 @@ error_reporting(-1);
 $root_path = getcwd() . '/';
 $podcast_file_path = $root_path . 'podcasts/podcast_files/';
 $podcast_data_path = $root_path . 'podcasts/podcast_data/';
+$podcasts_head_file = $root_path . 'podcasts/podcasts.json';
+$episode_limit = 30;
 
 // Loading in simplepie
 include_once($root_path . '/libs/simplepie/autoloader.php');
 
 // Loading in the podcast manager libraries.
-include_once($root_path . '/libs/podcast_manager/fetch_podcasts.php');
+include_once($root_path . '/libs/podcast_manager/php/fetch_podcasts.php');
 
 //test
 echo 'testing';
-update_feed('http://feed.thisamericanlife.org/talpodcast?format=xml');
-echo 'testing2';
+update_feed('http://feeds.wnyc.org/radiolab?format=xml');
+echo 'Complete';
 
 // Loads in a simplepie object to parse RSS feeds
 function load_feed_xml($url)
