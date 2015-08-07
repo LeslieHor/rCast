@@ -19,6 +19,8 @@ function episode($item){
 	$new_episode["status"] = 0;
 	$new_episode["total_time"] = $enclosure->get_duration();
 	$new_episode["extension"] = pathinfo($enclosure->get_link(), PATHINFO_EXTENSION);
+	$new_episode["local_path"] = "";
+	$new_episode["bookmark"] = 0;
 	
 	return $new_episode;
 }
@@ -36,10 +38,16 @@ function update_feed($feed_url)
 	$episodes = [];
 	$new_episodes = [];
 	
+	echo $path;
 	if (!file_exists($path))
 	{
 		// Create a new empty array
 		$podcast = podcast($feed_xml, $feed_url);
+		
+		// Add podcast to podcast.json
+		$podcasts_json = load_json_data($GLOBALS['podcasts_head_file']);
+		array_push($podcasts_json['podcasts'], $podcast);
+		save_json_data($podcasts_json, $GLOBALS['podcasts_head_file']);
 	}
 	else
 	{
@@ -81,7 +89,10 @@ function update_feed($feed_url)
 	
 	$podcast["episodes"] = $episodes;
 	
-	save_json_data($podcast, $path);
+	$save_item = [];
+	$save_item["episodes"] = $episodes;
+	
+	save_json_data($save_item, $path);
 	return;
 }
 
@@ -102,6 +113,11 @@ function get_feed_url($feed_md5)
 
 function update_all_feeds()
 {
+	$podcasts_json = load_json_data($GLOBALS['podcasts_head_file']);
 	
+	foreach ($podcasts_json['podcast'] as $podcast)
+	{
+		update_feed($podcast['url']);
+	}
 }
 ?>

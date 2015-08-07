@@ -1,7 +1,14 @@
 <?php
+// http://feed.thisamericanlife.org/talpodcast?format=xml
+// http://feeds.wnyc.org/radiolab
+// http://resources.h9blog.com/podcast-feeds/h9cast
+
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(-1);
+
+// Allows better downloading
+ini_set("memory_limit","256M");
 
 $root_path = getcwd() . '/';
 $podcast_file_path = $root_path . 'podcasts/podcast_files/';
@@ -14,12 +21,18 @@ include_once($root_path . '/libs/simplepie/autoloader.php');
 
 // Loading in the podcast manager libraries.
 include_once($root_path . '/libs/podcast_manager/php/fetch_podcasts.php');
+include_once($root_path . '/libs/podcast_manager/php/manage_podcast_files.php');
 
-//test
-echo 'testing';
-update_feed('http://feeds.wnyc.org/radiolab?format=xml');
-echo 'Complete';
-
+if(isset($_POST['action']) && !empty($_POST['action'])) {
+    $action = $_POST['action'];
+    switch($action) {
+		case 'download_episode' : download_episode($_POST['podcast_md5'], $_POST['episode_md5']);break;
+		case 'update_feed' : update_feed($_POST['feed_url']);break;
+		case 'update_all_feeds' : update_all_feeds();break;
+		case 'save_time' : save_time($_POST['podcast_md5'], $_POST['episode_md5'], $_POST['time']);break;
+	}
+}
+		
 // Loads in a simplepie object to parse RSS feeds
 function load_feed_xml($url)
 {

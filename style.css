@@ -12,7 +12,7 @@ body {
 }
 .audio_player {
 	width: 100%;
-	display: none;
+	/*display: none;*/
 }
 .odd {
 	background: #fdefd6;
@@ -28,5 +28,20 @@ body {
 
 }
 .show{
-	font-size: 50px;
+	
+}
+.hide{
+	display: none;
+}
+.main_player_controls{
+	text-align: center;
+}
+.centre_panel{
+	padding-top: 20px;
+}
+.episode{
+	padding-top: 10px;
+}
+.progress {
+	height: 5px;
 }
