@@ -1,0 +1,45 @@
+12:32:38 - test
+12:33:10 - test
+12:33:27 - test
+12:33:27 - Beginning download of ea678c9532e2414345c14f088534393f
+12:33:27 - Episode successfully found: ea678c9532e2414345c14f088534393f
+12:33:27 - Downloading: ea678c9532e2414345c14f088534393f-http://feeds.wnyc.org/~r/radiolab/~5/aX0h-2d08ZY/radiolab_podcast15maumau.mp3
+12:34:25 - Episode saved: ea678c9532e2414345c14f088534393f-/var/www/podcast_manager/podcasts/podcast_files/radiolab_from_wnyc/20150703mau_mau.mp3
+12:34:25 - Json data updated: ea678c9532e2414345c14f088534393f
+12:34:25 - No episode found for ea678c9532e2414345c14f088534393f
+12:37:53 - Beginning download of ea678c9532e2414345c14f088534393f
+12:37:53 - Episode successfully found: ea678c9532e2414345c14f088534393f
+12:37:53 - Downloading: ea678c9532e2414345c14f088534393f-http://feeds.wnyc.org/~r/radiolab/~5/aX0h-2d08ZY/radiolab_podcast15maumau.mp3
+12:38:55 - Episode saved: ea678c9532e2414345c14f088534393f-/var/www/podcast_manager/podcasts/podcast_files/radiolab_from_wnyc/20150703mau_mau.mp3
+12:38:55 - Json data updated: 28016d066a3107dba8b9b20b2d6df789.json
+12:38:55 - Json data updated: ea678c9532e2414345c14f088534393f
+12:39:34 - Beginning download of ea678c9532e2414345c14f088534393f
+12:39:34 - Episode successfully found: ea678c9532e2414345c14f088534393f
+12:39:34 - Downloading: ea678c9532e2414345c14f088534393f-http://feeds.wnyc.org/~r/radiolab/~5/aX0h-2d08ZY/radiolab_podcast15maumau.mp3
+12:40:28 - Episode saved: ea678c9532e2414345c14f088534393f-/var/www/podcast_manager/podcasts/podcast_files/radiolab_from_wnyc/20150703mau_mau.mp3
+12:40:30 - Json data updated: 28016d066a3107dba8b9b20b2d6df789.json
+12:40:30 - Json data updated: ea678c9532e2414345c14f088534393f
+12:41:44 - Beginning download of ea678c9532e2414345c14f088534393f
+12:41:44 - Episode successfully found: ea678c9532e2414345c14f088534393f
+12:41:44 - Downloading: ea678c9532e2414345c14f088534393f-http://feeds.wnyc.org/~r/radiolab/~5/aX0h-2d08ZY/radiolab_podcast15maumau.mp3
+12:42:36 - Episode saved: ea678c9532e2414345c14f088534393f-/var/www/podcast_manager/podcasts/podcast_files/radiolab_from_wnyc/20150703mau_mau.mp3
+12:42:36 - Json data updated: /var/www/podcast_manager/podcasts/podcast_data/28016d066a3107dba8b9b20b2d6df789.json
+12:42:36 - Json data updated: ea678c9532e2414345c14f088534393f
+13:12:59 - Beginning download of c8bde7aa40b1c91632d5301fb29802af
+13:12:59 - Episode successfully found: c8bde7aa40b1c91632d5301fb29802af
+13:12:59 - Downloading: c8bde7aa40b1c91632d5301fb29802af-http://feeds.wnyc.org/~r/radiolab/~5/clzsAsgykf4/radiolab_podcast16eyeinthesky.mp3
+13:13:44 - Episode saved: c8bde7aa40b1c91632d5301fb29802af-/var/www/podcast_manager/podcasts/podcast_files/radiolab_from_wnyc/20150618eye_in_the_sky.mp3
+13:13:44 - Json data updated: /var/www/podcast_manager/podcasts/podcast_data/28016d066a3107dba8b9b20b2d6df789.json
+13:13:44 - Json data updated: c8bde7aa40b1c91632d5301fb29802af
+13:25:01 - Beginning download of 849031d5609e93dc9051fbbed05c3713
+13:25:01 - Episode successfully found: 849031d5609e93dc9051fbbed05c3713
+13:25:01 - Downloading: 849031d5609e93dc9051fbbed05c3713-http://feeds.wnyc.org/~r/radiolab/~5/7pc-32HYYRc/radiolab_podcast15crispr.mp3
+13:25:52 - Episode saved: 849031d5609e93dc9051fbbed05c3713-/var/www/podcast_manager/podcasts/podcast_files/radiolab_from_wnyc/20150606antibodies_part_1_crispr.mp3
+13:25:52 - Json data updated: /var/www/podcast_manager/podcasts/podcast_data/28016d066a3107dba8b9b20b2d6df789.json
+13:25:52 - Json data updated: 849031d5609e93dc9051fbbed05c3713
+17:08:07 - Beginning download of 720fda780c7f899cc2809bf65bbf3b9d
+17:08:07 - Episode successfully found: 720fda780c7f899cc2809bf65bbf3b9d
+17:08:07 - Downloading: 720fda780c7f899cc2809bf65bbf3b9d-http://feeds.wnyc.org/~r/radiolab/~5/y8nvIrCsfvw/radiolab_podcast15nazicamp.mp3
+17:08:59 - Episode saved: 720fda780c7f899cc2809bf65bbf3b9d-/var/www/podcast_manager/podcasts/podcast_files/radiolab_from_wnyc/20150522nazi_summer_camp.mp3
+17:08:59 - Json data updated: /var/www/podcast_manager/podcasts/podcast_data/28016d066a3107dba8b9b20b2d6df789.json
+17:08:59 - Json data updated: 720fda780c7f899cc2809bf65bbf3b9d

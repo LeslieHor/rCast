@@ -1,41 +1,29 @@
 var app = angular.module('myApp', ['ui.bootstrap']);
 app.controller('myCtrl', function($scope, $http) {
-	$http.get("podcasts/podcasts.json")
-	.success(function(response) {
-		$scope.podcasts = response.podcasts;
-		
-		angular.forEach($scope.podcasts, function(podcast, key){
-			$http.get("podcasts/podcast_data/" + podcast.md5 + ".json")
-			.success(function(response) {
-				// Pass the data to the master array
-				podcast.episodes = response.episodes;
+	// Reserving variable names
+	$scope.current_podcast = "";
+	$scope.current_track = "";
+	
+	// Reserving variable names
+	$scope.current_time = 0;
+	$scope.total_time = 0;
+	
+	$scope.refresh_data = function() {
+		$http.get("podcasts/podcasts.json")
+		.success(function(response) {
+			$scope.podcasts = response.podcasts;
+			
+			angular.forEach($scope.podcasts, function(podcast, key){
+				$http.get("podcasts/podcast_data/" + podcast.md5 + ".json",  { headers: { 'Cache-Control' : 'no-cache' } })
+				.success(function(response) {
+					// Pass the data to the master array
+					podcast.episodes = response.episodes;
+				});
 			});
 		});
-		
-		// Example Data
-		$scope.current_podcast = "This American Life";
-		$scope.current_track = "#443: Amusement Park";
-		
-		// Reserving variable names
-		$scope.current_time = 0;
-		$scope.total_time = 0;
-	});
+	};
 	
-	// When clicking a podcast name, load in the episodes or hide them
-	//$scope.load_data = function() {
-	//	$http.get("podcasts/podcasts.json")
-	//	.success(function(response) {
-	//		$scope.podcasts = response.podcasts;
-	//		
-	//		angular.forEach($scope.podcasts, function(podcast, key){
-	//			$http.get("podcasts/podcast_data/" + podcast.md5 + ".json")
-	//			.success(function(response) {
-	//				// Pass the data to the master array
-	//				podcast.episodes = response.episodes;
-	//			});
-	//		});
-	//	});
-	//};
+	$scope.refresh_data();
 	
 	// Download an episode
 	$scope.download_episode = function(podcast, episode) {
@@ -49,11 +37,12 @@ app.controller('myCtrl', function($scope, $http) {
 			},
 			type: 'post',
 			success: function(output) {
+				alert(output);
 				$http.get("podcasts/podcast_data/" + podcast.md5 + ".json")
 				.success(function(response) {
 					// Pass the data to the master array
-					podcast.episodes = response.episodes;
 					episode.status = 2;
+					episode.local_path = output;
 				});
 			}
 		}); //Ajax call
@@ -63,13 +52,19 @@ app.controller('myCtrl', function($scope, $http) {
 		episode.status = 3;
 		var e = document.getElementById('audio_player');
 		e.src = 'podcasts/podcast_files/' + episode.local_path;
-		e.currentTime = episode.bookmark;
-		
-		play();
 		
 		$scope.current_podcast = podcast.name;
 		$scope.current_track = episode.title;
+		
+		setTimeout($scope.load_time(episode), 1000);
+		
+		play();
 	};
+	
+	$scope.load_time = function(episode) {
+		var e = document.getElementById('audio_player');
+		e.currentTime = episode.bookmark;
+	}
 	
 	
 	$scope.save_time = function(podcast, episode){
@@ -92,6 +87,36 @@ app.controller('myCtrl', function($scope, $http) {
 			}
 		}); //Ajax call
 	};
+	
+	$scope.update_feed = function(podcast){
+		var feed_url = podcast.url;
+		$.ajax({
+			url: 'common.php',
+			data: {
+				action: 'update_feed',
+				feed_url: feed_url,
+			},
+			type: 'post',
+			success: function(output) {
+				alert(output);
+				var scope = angular.element("#main-content").scope();
+				scope.$apply();
+			}
+		}); //Ajax call
+	};
+	
+	$scope.debug = function(object){
+		alert(JSON.stringify(object));
+	};
+	$scope.prev = function(){
+		var e = document.getElementById('audio_player');
+		e.currentTime = e.currentTime - 30;
+	}
+	
+	$scope.next = function(){
+		var e = document.getElementById('audio_player');
+		e.currentTime = e.currentTime + 30;
+	}
 });
 
 app.filter('secondsToDateTime', [function() {

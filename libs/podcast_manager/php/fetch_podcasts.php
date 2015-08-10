@@ -21,6 +21,10 @@ function episode($item){
 	$new_episode["extension"] = pathinfo($enclosure->get_link(), PATHINFO_EXTENSION);
 	$new_episode["local_path"] = "";
 	$new_episode["bookmark"] = 0;
+	$description = $item->get_content();
+	$description = strip_tags($description);
+	$description = html_entity_decode($description);
+	$new_episode["description"] = $description;
 	
 	return $new_episode;
 }

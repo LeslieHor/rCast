@@ -57,4 +57,14 @@ function save_json_data($json_data, $path)
 {
 	file_put_contents($path, json_encode($json_data));
 }
+
+// Log the event in the logs folder
+function log_event($event)
+{
+	$date = date("Y-m-d");
+	$time = date("H:i:s");
+	$log_file_path = $GLOBALS['root_path'] . 'logs/' . $date . '.txt';
+	$log_message = $time . " - " . $event;
+	file_put_contents($log_file_path, $log_message . "\n", FILE_APPEND);
+}
 ?>

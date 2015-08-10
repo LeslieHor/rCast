@@ -1,5 +1,5 @@
 body {
-	padding-top: 50px;
+	padding-top: 60px;
 	padding-bottom: 200px;
 }
 .starter-template {
@@ -25,7 +25,10 @@ body {
 	height: 64px;
 }
 .player_control{
-
+}
+.player_information{
+	margin-top: -20px;
+	
 }
 .show{
 	
@@ -44,4 +47,8 @@ body {
 }
 .progress {
 	height: 5px;
+}
+.progress-label {
+    float: left;
+    margin-right: 1em;
 }
