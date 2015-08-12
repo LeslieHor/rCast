@@ -81,8 +81,6 @@ app.controller('myCtrl', function($scope, $http) {
 			},
 			type: 'post',
 			success: function(output) {
-				var scope = angular.element("#main-content").scope();
-				scope.$apply();
 				episode.bookmark = time;
 			}
 		}); //Ajax call
