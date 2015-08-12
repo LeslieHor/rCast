@@ -45,8 +45,8 @@ body {
 .episode{
 	padding-top: 10px;
 }
-.progress {
-	height: 5px;
+.progress_input {
+	height: 40px;
 }
 .progress-label {
     float: left;
