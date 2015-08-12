@@ -46,7 +46,7 @@
 							<button type="add" class="btn btn-default" onclick="update_feed()"><span class="glyphicon glyphicon-plus"></span></button>
 						</form>
 					</li>
-					<li><!--class="active"--><a href='javascript:(function(e,a,g,h,f,c,b,d)%7Bif(!(f%3De.jQuery)%7C%7Cg>f.fn.jquery%7C%7Ch(f))%7Bc%3Da.createElement("script")%3Bc.type%3D"text/javascript"%3Bc.src%3D"//ajax.googleapis.com/ajax/libs/jquery/"%2Bg%2B"/jquery.min.js"%3Bc.onload%3Dc.onreadystatechange%3Dfunction()%7Bif(!b%26%26(!(d%3Dthis.readyState)%7C%7Cd%3D%3D"loaded"%7C%7Cd%3D%3D"complete"))%7Bh((f%3De.jQuery).noConflict(1),b%3D1)%3Bf(c).remove()%7D%7D%3Ba.documentElement.childNodes%5B0%5D.appendChild(c)%7D%7D)(window,document,"1.3.2",function(%24,L)%7Bif(%24(".bootswatcher")%5B0%5D)%7B%24(".bootswatcher").remove()%7Delse%7Bvar %24e%3D%24(%27<select class%3D"bootswatcher"><option>Cerulean</option><option>Cosmo</option><option>Cyborg</option><option>Darkly</option><option>Flatly</option><option>Journal</option><option>Lumen</option><option>Paper</option><option>Readable</option><option>Sandstone</option><option>Simplex</option><option>Slate</option><option>Spacelab</option><option>Superhero</option><option>United</option><option>Yeti</option></select>%27)%3Bvar l%3D1%2BMath.floor(Math.random()*%24e.children().length)%3B%24e.css(%7B"z-index":"99999",position:"fixed",top:"5px",right:"5px",opacity:"0.5",color:"%23000"%7D).hover(function()%7B%24(this).css("opacity","1")%7D,function()%7B%24(this).css("opacity","0.5")%7D).change(function()%7Bif(!%24("link.bootswatcher")%5B0%5D)%7B%24("head").append(%27<link rel%3D"stylesheet" class%3D"bootswatcher">%27)%7D%24("link.bootswatcher").attr("href","//bootswatch.com/"%2B%24(this).find(":selected").text().toLowerCase()%2B"/bootstrap.min.css")%7D).find("option:nth-child("%2Bl%2B")").attr("selected","selected").end().trigger("change")%3B%24("body").append(%24e)%7D%3B%7D)%3B'>Themes</a></li>
+					<!--<li><!--class="active"--<a href='javascript:(function(e,a,g,h,f,c,b,d)%7Bif(!(f%3De.jQuery)%7C%7Cg>f.fn.jquery%7C%7Ch(f))%7Bc%3Da.createElement("script")%3Bc.type%3D"text/javascript"%3Bc.src%3D"//ajax.googleapis.com/ajax/libs/jquery/"%2Bg%2B"/jquery.min.js"%3Bc.onload%3Dc.onreadystatechange%3Dfunction()%7Bif(!b%26%26(!(d%3Dthis.readyState)%7C%7Cd%3D%3D"loaded"%7C%7Cd%3D%3D"complete"))%7Bh((f%3De.jQuery).noConflict(1),b%3D1)%3Bf(c).remove()%7D%7D%3Ba.documentElement.childNodes%5B0%5D.appendChild(c)%7D%7D)(window,document,"1.3.2",function(%24,L)%7Bif(%24(".bootswatcher")%5B0%5D)%7B%24(".bootswatcher").remove()%7Delse%7Bvar %24e%3D%24(%27<select class%3D"bootswatcher"><option>Cerulean</option><option>Cosmo</option><option>Cyborg</option><option>Darkly</option><option>Flatly</option><option>Journal</option><option>Lumen</option><option>Paper</option><option>Readable</option><option>Sandstone</option><option>Simplex</option><option>Slate</option><option>Spacelab</option><option>Superhero</option><option>United</option><option>Yeti</option></select>%27)%3Bvar l%3D1%2BMath.floor(Math.random()*%24e.children().length)%3B%24e.css(%7B"z-index":"99999",position:"fixed",top:"5px",right:"5px",opacity:"0.5",color:"%23000"%7D).hover(function()%7B%24(this).css("opacity","1")%7D,function()%7B%24(this).css("opacity","0.5")%7D).change(function()%7Bif(!%24("link.bootswatcher")%5B0%5D)%7B%24("head").append(%27<link rel%3D"stylesheet" class%3D"bootswatcher">%27)%7D%24("link.bootswatcher").attr("href","//bootswatch.com/"%2B%24(this).find(":selected").text().toLowerCase()%2B"/bootstrap.min.css")%7D).find("option:nth-child("%2Bl%2B")").attr("selected","selected").end().trigger("change")%3B%24("body").append(%24e)%7D%3B%7D)%3B'>Themes</a></li>-->
 					<li><a id="update_all" href="#" onclick="update_all_feeds()">Update All</a></li>
 					<li><a id="refresh_data" href="javascript:void(0);" ng-click="refresh_data()">REF</a></li>
 					<li><a id="testt" href="javascript:void(0);" onclick="test_function()">Vibration</a></li>
@@ -111,9 +111,10 @@
 						</div>
 						
 						<!-- Progress bar. Keeps up to date with the audio object time -->
-						<div class="progress">
-						  <div id="player_progress_bar1" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+						<div class="progress_input">
+							  <input type="range" id="player_bar" value="50" min="0" max="100" onchange="change_time()">
 						</div>
+						
 						
 						<!-- Shows track information -->
 						<div id="player_information" class="player_information">
@@ -155,7 +156,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="libs/bootstrap/js/bootstrap.min.js"></script>
-    <script src="libs/slider/js/bootstrap-slider.js"></script>
     <script src="libs/ui-bootstrap/js/ui-bootstrap.js"></script>
 	<script src="libs/podcast_manager/js/init.js"></script>
 	<script src="libs/podcast_manager/js/app.js"></script>

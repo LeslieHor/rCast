@@ -53,6 +53,8 @@ app.controller('myCtrl', function($scope, $http) {
 		var e = document.getElementById('audio_player');
 		e.src = 'podcasts/podcast_files/' + episode.local_path;
 		
+		$('#player_bar').attr('max', episode.total_time);
+		
 		$scope.current_podcast = podcast.name;
 		$scope.current_track = episode.title;
 		

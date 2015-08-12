@@ -1,14 +1,19 @@
 function update_time()
 {
 	var e = document.getElementById('audio_player');
-	var percentage = (e.currentTime / e.duration) * 100; 
-	$('#player_progress_bar1').css('width', percentage+'%');
-	
+	//var percentage = (e.currentTime / e.duration) * 100; 
+	$('#player_bar').val(e.currentTime);
 	var scope = angular.element("#main-content").scope();
 	scope.$apply(function(){
         scope.current_time = e.currentTime;
         scope.total_time = e.duration;
     })
+}
+
+function change_time()
+{
+	var e = document.getElementById('audio_player');
+	e.currentTime = $('#player_bar').val();
 }
 
 function togglePlayState()

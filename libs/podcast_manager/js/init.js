@@ -2,11 +2,11 @@ $(document).ready(function() {
 	$('.audio_player').hide();
 }); //document.ready
 
-$('#player_progress_bar').slider({
-	formatter: function(value) {
-		return 'Current value: ' + value;
-	}
-});
+//$('#player_progress_bar').slider({
+//	formatter: function(value) {
+//		return 'Current value: ' + value;
+//	}
+//});
 
 function test_function(){
 	var e = document.getElementById('audio_player');
