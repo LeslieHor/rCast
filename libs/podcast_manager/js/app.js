@@ -147,6 +147,19 @@ app.controller('myCtrl', function($scope, $http) {
 		var e = document.getElementById('audio_player');
 		e.currentTime = e.currentTime + 30;
 	}
+	
+	$scope.play = function(){
+		
+	}
+	
+	$scope.pause = function(){
+		
+	}
+	
+	$scope.toggle_play_pause = function(){
+		
+	}
+	
 });
 
 app.filter('secondsToDateTime', [function() {
