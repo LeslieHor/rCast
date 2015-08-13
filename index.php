@@ -87,7 +87,7 @@
 								
 								<!-- Buttons to show on status > 0 (downloaded) -->
 								<button ng-class="{ 'hide' : episode.local_path.length == 0 }" class="btn btn-default" ng-click="play_episode(podcast, episode)"><span class="glyphicon glyphicon-play"></span></button>
-								<button ng-class="{ 'hide' : episode.local_path.length == 0 }" class="btn btn-default" ng-click="save_time(podcast, episode)"><span class="glyphicon glyphicon-time"></span></button>
+								<button ng-class="{ 'hide' : episode.local_path.length == 0 }" class="btn btn-default" ng-click="save_time()"><span class="glyphicon glyphicon-time"></span></button>
 								<button ng-class="{ 'hide' : episode.local_path.length == 0 }" class="btn btn-default" ng-click=""><span class="glyphicon glyphicon-trash"></span></button>
 								
 								<!-- Debug button -->
@@ -159,7 +159,6 @@
     <script src="libs/ui-bootstrap/js/ui-bootstrap.js"></script>
 	<script src="libs/podcast_manager/js/init.js"></script>
 	<script src="libs/podcast_manager/js/app.js"></script>
-	<script src="libs/podcast_manager/js/data_handler.js"></script>
 	<script src="libs/podcast_manager/js/player_controls.js"></script>
   </body>
 </html>

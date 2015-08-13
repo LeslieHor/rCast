@@ -1,13 +1,11 @@
+var current_time;
+
 $(document).ready(function() {
 	$('.audio_player').hide();
+	current_time = 0;
 }); //document.ready
 
-//$('#player_progress_bar').slider({
-//	formatter: function(value) {
-//		return 'Current value: ' + value;
-//	}
-//});
-
+// Delete this at some point
 function test_function(){
 	var e = document.getElementById('audio_player');
 	alert(e.currentTime);

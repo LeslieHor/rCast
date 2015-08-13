@@ -8,6 +8,10 @@ app.controller('myCtrl', function($scope, $http) {
 	$scope.current_time = 0;
 	$scope.total_time = 0;
 	
+	$scope.test = function() {
+		alert($scope.episode.title);
+	}
+	
 	$scope.refresh_data = function() {
 		$http.get("podcasts/podcasts.json")
 		.success(function(response) {
@@ -49,6 +53,13 @@ app.controller('myCtrl', function($scope, $http) {
 	};
 	
 	$scope.play_episode = function(podcast, episode) {
+		var e = document.getElementById('audio_player');
+		if (e.src.length > 0){
+			$scope.save_time_specific($scope.podcast, $scope.episode);
+		}
+		
+		$scope.podcast = podcast;
+		$scope.episode = episode;
 		episode.status = 3;
 		var e = document.getElementById('audio_player');
 		e.src = 'podcasts/podcast_files/' + episode.local_path;
@@ -69,7 +80,26 @@ app.controller('myCtrl', function($scope, $http) {
 	}
 	
 	
-	$scope.save_time = function(podcast, episode){
+	$scope.save_time = function(){
+		var e = document.getElementById('audio_player');
+		var time = e.currentTime;
+		
+		$.ajax({
+			url: 'common.php',
+			data: {
+				action: 'save_time',
+				podcast_md5: $scope.podcast.md5,
+				episode_md5: $scope.episode.md5,
+				time: time
+			},
+			type: 'post',
+			success: function(output) {
+				$scope.episode.bookmark = time;
+			}
+		}); //Ajax call
+	};
+	
+	$scope.save_time_specific = function(podcast, episode){
 		var e = document.getElementById('audio_player');
 		var time = e.currentTime;
 		
