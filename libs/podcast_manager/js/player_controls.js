@@ -13,7 +13,11 @@ function update_time()
         scope.current_time = e.currentTime;
         scope.total_time = e.duration; // This is a bit redundant. It only needs to be done once, not every time the current time changes.
 		
-		if (current_time < (e.currentTime - 10))
+		if ((e.currentTime > (e.duration - 15)) && (scope.episode['status'] < 4))
+		{
+			scope.finished_episode();
+		}
+		else if (current_time < (e.currentTime - 10))
 		{
 			scope.save_time();
 			current_time = e.currentTime;

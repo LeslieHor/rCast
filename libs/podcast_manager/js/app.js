@@ -61,6 +61,9 @@ app.controller('myCtrl', function($scope, $http) {
 		$scope.podcast = podcast;
 		$scope.episode = episode;
 		episode.status = 3;
+		
+		$scope.set_status(podcast, episode, status);
+		
 		var e = document.getElementById('audio_player');
 		e.src = 'podcasts/podcast_files/' + episode.local_path;
 		
@@ -69,16 +72,48 @@ app.controller('myCtrl', function($scope, $http) {
 		$scope.current_podcast = podcast.name;
 		$scope.current_track = episode.title;
 		
-		setTimeout($scope.load_time(episode), 1000);
+		$scope.load_time(episode);
 		
 		play();
 	};
+	
+	$scope.set_status = function(podcast, episode, status)
+	{
+		$.ajax({
+			url: 'common.php',
+			data: {
+				action: 'set_status',
+				podcast_md5: podcast.md5,
+				episode_md5: episode.md5,
+				status: status
+			},
+			type: 'post',
+			success: function(output) {
+				
+			}
+		}); //Ajax call
+	}
 	
 	$scope.load_time = function(episode) {
 		var e = document.getElementById('audio_player');
 		e.currentTime = episode.bookmark;
 	}
 	
+	$scope.finished_episode = function() {
+		$.ajax({
+			url: 'common.php',
+			data: {
+				action: 'finished_episode',
+				podcast_md5: $scope.podcast.md5,
+				episode_md5: $scope.episode.md5
+			},
+			type: 'post',
+			success: function(output) {
+				$scope.episode.status = 4;
+				alert(output);
+			}
+		}); //Ajax call
+	}
 	
 	$scope.save_time = function(){
 		var e = document.getElementById('audio_player');

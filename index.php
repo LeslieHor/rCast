@@ -15,7 +15,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="libs/slider/css/slider.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="style.css" rel="stylesheet">
@@ -72,7 +71,7 @@
 								{{ episode.title }}
 								
 								<!-- Change label according to the episode status -->
-								<span ng-class="{ 'label-info' : episode.status == 0 , 'label-warning' : episode.status == 1, 'label-success' : episode.status == 2, 'label-primary' : episode.status == 3}" class="label">{{ episode.status | intToStatus }}</span>
+								<span ng-class="{ 'label-info' : episode.status == 0 , 'label-warning' : episode.status == 1, 'label-success' : episode.status == 2, 'label-primary' : episode.status == 3, 'label-default' : episode.status == 4}" class="label">{{ episode.status | intToStatus }}</span>
 							</accordion-heading>
 							<div>
 								<!-- Show podcast episode information -->

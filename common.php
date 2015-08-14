@@ -30,9 +30,21 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 		case 'update_feed' : update_feed($_POST['feed_url']);break;
 		case 'update_all_feeds' : update_all_feeds();break;
 		case 'save_time' : save_time($_POST['podcast_md5'], $_POST['episode_md5'], $_POST['time']);break;
+		case 'finished_episode' : finished_episode($_POST['podcast_md5'], $_POST['episode_md5']);break;
+		case 'set_status' : set_status($_POST['podcast_md5'], $_POST['episode_md5'], $_POST['status']);break;
 	}
 }
-		
+
+// Log the event in the logs folder
+function log_event($event)
+{
+	$date = date("Y-m-d");
+	$time = date("H:i:s");
+	$log_file_path = $GLOBALS['root_path'] . 'logs/' . $date . '.txt';
+	$log_message = $time . " - " . $event;
+	file_put_contents($log_file_path, $log_message . "\n", FILE_APPEND);
+}
+
 // Loads in a simplepie object to parse RSS feeds
 function load_feed_xml($url)
 {
@@ -55,16 +67,14 @@ function load_json_data($local_path)
 // Saves the data as a JSON file
 function save_json_data($json_data, $path)
 {
-	file_put_contents($path, json_encode($json_data));
-}
-
-// Log the event in the logs folder
-function log_event($event)
-{
-	$date = date("Y-m-d");
-	$time = date("H:i:s");
-	$log_file_path = $GLOBALS['root_path'] . 'logs/' . $date . '.txt';
-	$log_message = $time . " - " . $event;
-	file_put_contents($log_file_path, $log_message . "\n", FILE_APPEND);
+	try
+	{
+		file_put_contents($path, json_encode($json_data));
+		log_event("Save succeeded: " . $path);
+	}
+	catch (Exception $e)
+	{
+		log_event("Save to failed: " . $path . " ERROR: " . $e);
+	}
 }
 ?>

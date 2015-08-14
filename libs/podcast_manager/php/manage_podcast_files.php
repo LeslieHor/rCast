@@ -46,6 +46,33 @@ function download_episode($feed_md5, $episode_md5)
 	log_event("No episode found for " . $episode_md5);
 }
 
+function finished_episode($podcast_md5, $episode_md5)
+{
+	log_event("Setting as finished " . $podcast_md5 . ':' . $episode_md5);
+	$path = $GLOBALS['podcast_data_path'] . $podcast_md5 . '.json';
+	$episodes = load_json_data($path);
+	foreach ($episodes['episodes'] as &$episode)
+	{
+		if (strcmp($episode['md5'], $episode_md5) == 0)
+		{
+			log_event("Episode found: " . $episode['title']);
+			log_event("Episode status before: " . $episode['status']);
+			$episode['status'] = 4;
+			log_event("Episode status after: " . $episode['status']);
+			try
+			{
+				save_json_data($episodes, $path);
+				log_event("Status changed to 4 and saved " . json_encode($episodes));
+			}
+			catch (Exception $e)
+			{
+				log_event("Saving failed: " . $e);
+			}
+		}
+	}
+	log_event("Finished setting as finished " . $podcast_md5 . ':' . $episode_md5);
+}
+
 function get_podcast_name($feed_md5)
 {
 	$podcasts = load_json_data($GLOBALS['podcasts_head_file']);
@@ -73,8 +100,21 @@ function save_time($podcast_md5, $episode_md5, $time)
 	{
 		if (strcmp($episode['md5'], $episode_md5) == 0)
 		{
-			$episode['status'] = 3;
 			$episode['bookmark'] = $time;
+			save_json_data($episodes, $path);
+		}
+	}
+}
+
+function set_status($podcast_md5, $episode_md5, $status)
+{
+	$path = $GLOBALS['podcast_data_path'] . $podcast_md5 . '.json';
+	$episodes = load_json_data($path);
+	foreach ($episodes['episodes'] as &$episode)
+	{
+		if (strcmp($episode['md5'], $episode_md5) == 0)
+		{
+			$episode['status'] = $status;
 			save_json_data($episodes, $path);
 		}
 	}
