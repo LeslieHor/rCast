@@ -1,3 +1,5 @@
-podcasts/
-cache/
-logs/
+podcasts/podcasts.json
+podcasts/podcast_data/*
+podcasts/podcast_files/*
+cache/*
+logs/*
