@@ -100,6 +100,10 @@ function save_time($podcast_md5, $episode_md5, $time)
 	{
 		if (strcmp($episode['md5'], $episode_md5) == 0)
 		{
+			if ($episode['status'] < 3)
+			{
+				$episode['status'] = 3;
+			}
 			$episode['bookmark'] = $time;
 			save_json_data($episodes, $path);
 		}
