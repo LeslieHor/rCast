@@ -1,5 +1,6 @@
-podcasts/podcasts.json
-podcasts/podcast_data/*
-podcasts/podcast_files/*
+podcasts/
+!podcasts/podcast_data/_dummyfile.txt
+!podcasts/podcast_files/_dummyfile.txt
 cache/*
-logs/*
+logs/
+!logs/_dummyfile.txt
