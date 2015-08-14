@@ -4,6 +4,12 @@ function update_time()
 	// Set e to reference the audio player
 	var e = document.getElementById('audio_player');
 	
+	// If the slider bar max is not the same as the e.duration, set it to be the e.duration
+	if ($('#player_bar').attr('max') != e.duration)
+	{	
+		$('#player_bar').attr('max', e.duration);
+	}
+	
 	// Set the value of the slider bar to the current time of the audio player
 	$('#player_bar').val(e.currentTime);
 	
