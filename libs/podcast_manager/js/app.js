@@ -110,7 +110,6 @@ app.controller('myCtrl', function($scope, $http) {
 			type: 'post',
 			success: function(output) {
 				$scope.episode.status = 4;
-				alert(output);
 			}
 		}); //Ajax call
 	}
