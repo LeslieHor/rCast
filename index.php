@@ -157,7 +157,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="libs/ui-bootstrap/js/ui-bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.js"></script>
 	<script src="libs/podcast_manager/js/init.js"></script>
 	<script src="libs/podcast_manager/js/app.js"></script>
 	<script src="libs/podcast_manager/js/player_controls.js"></script>
