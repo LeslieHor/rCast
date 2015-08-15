@@ -16,7 +16,7 @@
     <title>Podcast Manager</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- Custom styles for this template -->
     <link href="style.css" rel="stylesheet">
@@ -156,7 +156,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="libs/ui-bootstrap/js/ui-bootstrap.js"></script>
 	<script src="libs/podcast_manager/js/init.js"></script>
 	<script src="libs/podcast_manager/js/app.js"></script>
