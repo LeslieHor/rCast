@@ -8,7 +8,7 @@ ini_set('display_startup_errors',1);
 error_reporting(-1);
 
 // Allows better downloading
-ini_set("memory_limit","256M");
+ini_set("memory_limit","512M");
 
 $root_path = getcwd() . '/';
 $podcast_file_path = $root_path . 'podcasts/podcast_files/';
