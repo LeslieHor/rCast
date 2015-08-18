@@ -35,7 +35,12 @@ app.controller('myCtrl', function($scope, $http) {
 				}
 			});
 		});
+		
 		angular.forEach($scope.podcasts, function(podcast, key){
+			if (typeof podcast.episodes == "undefined" || !(podcast.episodes instanceof Array)) {
+				podcast.episodes = [];
+			}
+			
 			$http.get("podcasts/podcast_data/" + podcast.md5 + ".json")
 			.success(function(response) {
 				temp_episodes = response.episodes;
@@ -272,9 +277,8 @@ app.controller('myCtrl', function($scope, $http) {
 			},
 			type: 'post',
 			success: function(output) {
-				alert(output);
-				var scope = angular.element("#main-content").scope();
-				scope.$apply();
+				$scope.refresh_data();
+				$scope.refresh_data();
 			}
 		}); //Ajax call
 	};

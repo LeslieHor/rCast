@@ -22,9 +22,8 @@ function update_feed(){
 		},
 		type: 'post',
 		success: function(output) {
-			alert(output);
 			var scope = angular.element("#main-content").scope();
-			scope.$apply();
+			scope.refresh_data();
 		}
 	}); //Ajax call
 };
