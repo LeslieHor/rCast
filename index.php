@@ -88,14 +88,26 @@
 								
 								<!-- Buttons to show on status between 2 and 4 (downloaded, in progress, or finished) -->
 								<button ng-class="{ 'hide' : !(episode.status >= 2 && episode.status <= 4) }" class="btn btn-default" ng-click="play_episode(podcast, episode)"><span class="glyphicon glyphicon-play"></span></button>
-								<button ng-class="{ 'hide' : !(episode.status >= 2 && episode.status <= 4) }" class="btn btn-default" ng-click="save_time()"><span class="glyphicon glyphicon-time"></span></button>
 								<button ng-class="{ 'hide' : !(episode.status >= 2 && episode.status <= 4) }" class="btn btn-default" ng-click="delete_episode(podcast, episode)"><span class="glyphicon glyphicon-trash"></span></button>
 								
 								<!-- Buttons to show on status 5 (deleted) -->
 								<button ng-class="{ 'hide' : !(episode.status == 5) }" class="btn btn-default" ng-click="reset_episode(podcast, episode)"><span class="glyphicon glyphicon-repeat"></span></button>
 								
-								<!-- Debug button -->
-								<button class="btn btn-default" ng-click="debug(episode)"><span class="glyphicon glyphicon-info-sign"></span></button>
+								<!-- Overflow menu -->
+								<div class="btn-group dropup">
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Options <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+									<li><a href="#" onclick="alert('Not working')">Set as finished</a></li>
+									<li><a href="#" onclick="alert('Not working')">Set as downloaded</a></li>
+									<li><a href="#" onclick="alert('Not working')">Delete</a></li>
+									<li><a href="#" onclick="alert('Not working')">Reset</a></li>
+									<li role="separator" class="divider"></li>
+									<li ng-class="{ 'hide' : !(episode.status >= 2 && episode.status <= 4) }"><a href="#" ng-click="save_time()">Save Time</a></li>
+									<li><a href="#" ng-click="debug(episode)">Debug</a></li>
+								  </ul>
+								</div>
 							</div>
 						</accordion-group>
 					</accordion>
