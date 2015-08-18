@@ -116,21 +116,23 @@ app.controller('myCtrl', function($scope, $http) {
 	
 	// Delete the episode
 	$scope.delete_episode = function(podcast, episode) {
-		$.ajax({
-			url: 'common.php',
-			data: {
-				action: 'delete_episode',
-				podcast_md5: podcast.md5,
-				episode_md5: episode.md5
-			},
-			type: 'post',
-			success: function(output) {
-				episode.status = 5;
-				episode.bookmark = 0;
-				episode.local_path = '';
-				$scope.$apply();
-			}
-		}); //Ajax call
+		if (confirm("Are you sure you want to delete this episode?")) {
+			$.ajax({
+				url: 'common.php',
+				data: {
+					action: 'delete_episode',
+					podcast_md5: podcast.md5,
+					episode_md5: episode.md5
+				},
+				type: 'post',
+				success: function(output) {
+					episode.status = 5;
+					episode.bookmark = 0;
+					episode.local_path = '';
+					$scope.$apply();
+				}
+			}); //Ajax call
+		}
 	}
 	
 	// Reset an episode back to status 0
