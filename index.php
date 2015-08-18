@@ -102,6 +102,7 @@
 								  <ul class="dropdown-menu">
 									<li><a href="#" onclick="alert('Not working')">Set as finished</a></li>
 									<li><a href="#" onclick="alert('Not working')">Set as downloaded</a></li>
+									<li><a href="#" ng-click="load_time(episode)">Load Time</a></li>
 									<li><a href="#" onclick="alert('Not working')">Delete</a></li>
 									<li><a href="#" onclick="alert('Not working')">Reset</a></li>
 									<li role="separator" class="divider"></li>
