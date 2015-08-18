@@ -23,6 +23,23 @@ include_once($root_path . '/libs/simplepie/autoloader.php');
 include_once($root_path . '/libs/podcast_manager/php/fetch_podcasts.php');
 include_once($root_path . '/libs/podcast_manager/php/manage_podcast_files.php');
 
+// Check if the podcast directories exist. If not, create them
+if (!is_dir($root_path . 'podcasts/')) {
+	mkdir($root_path . 'podcasts/');
+}
+if (!is_dir($podcast_file_path)) {
+	mkdir($podcast_file_path);
+}
+if (!is_dir($podcast_data_path)) {
+	mkdir($podcast_data_path);
+}
+if (!is_dir($root_path . 'logs/')) {
+	mkdir($root_path . 'logs/');
+}
+if (!is_dir($root_path . 'cache/')) {
+	mkdir($root_path . 'cache/');
+}
+
 if(isset($_POST['action']) && !empty($_POST['action'])) {
     $action = $_POST['action'];
     switch($action) {
