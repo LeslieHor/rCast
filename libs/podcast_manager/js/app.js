@@ -126,6 +126,8 @@ app.controller('myCtrl', function($scope, $http) {
 			type: 'post',
 			success: function(output) {
 				episode.status = 5;
+				episode.bookmark = 0;
+				episode.local_path = '';
 				$scope.$apply();
 			}
 		}); //Ajax call
@@ -133,7 +135,21 @@ app.controller('myCtrl', function($scope, $http) {
 	
 	// Reset an episode back to status 0
 	$scope.reset_episode = function(podcast, episode){
-		
+		$.ajax({
+			url: 'common.php',
+			data: {
+				action: 'reset_episode',
+				podcast_md5: podcast.md5,
+				episode_md5: episode.md5
+			},
+			type: 'post',
+			success: function(output) {
+				episode.status = 0;
+				episode.bookmark = 0;
+				episode.local_path = '';
+				$scope.$apply();
+			}
+		}); //Ajax call
 	}
 	
 	// Save the time for the currently playing episode
