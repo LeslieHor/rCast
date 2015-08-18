@@ -202,4 +202,52 @@ function set_status($podcast_md5, $episode_md5, $status)
 		}
 	}
 }
+
+function delete_podcast($podcast_md5)
+{
+	$podcasts_json = load_json_data($GLOBALS['podcasts_head_file']);
+	foreach ($podcasts_json['podcasts'] as &$podcast)
+	{
+		if (strcmp($podcast['md5'], $podcast_md5) == 0)
+		{
+			$index = array_search($podcast, $podcasts_json['podcasts']);
+			$podcast_folder_name = make_url_safe($podcast['name']);
+			break;
+		}
+	}
+	array_splice($podcasts_json['podcasts'], $index, 1);
+	
+	save_json_data($podcasts_json, $GLOBALS['podcasts_head_file']);
+	
+	unlink($GLOBALS['podcast_data_path'] . $podcast_md5 . '.json');
+	
+	delete_directory($GLOBALS['podcast_file_path'] . $podcast_folder_name);
+}
+function delete_directory($dirname) {
+	if (is_dir($dirname))
+	{
+		$dir_handle = opendir($dirname);
+	}
+	if (!$dir_handle)
+	{
+		return false;
+	}
+	
+	while($file = readdir($dir_handle)) {
+		if ($file != "." && $file != "..")
+		{
+			if (!is_dir($dirname."/".$file))
+			{
+				unlink($dirname."/".$file);
+			}
+			else
+			{
+				delete_directory($dirname.'/'.$file);
+			}
+		}
+	}
+	closedir($dir_handle);
+	rmdir($dirname);
+	return true;
+}
 ?>

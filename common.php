@@ -51,6 +51,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 		case 'set_status' : set_status($_POST['podcast_md5'], $_POST['episode_md5'], $_POST['status']);break;
 		case 'delete_episode' : delete_episode($_POST['podcast_md5'], $_POST['episode_md5']);break;
 		case 'reset_episode' : reset_episode($_POST['podcast_md5'], $_POST['episode_md5']);break;
+		case 'delete_podcast' : delete_podcast($_POST['podcast_md5']);break;
 	}
 }
 

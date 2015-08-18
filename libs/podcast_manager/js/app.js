@@ -9,10 +9,58 @@ app.controller('myCtrl', function($scope, $http) {
 	$scope.total_time = 0;
 	
 	$scope.test = function() {
-		alert($scope.episode.title);
+		alert($scope);
 	}
 	
 	$scope.refresh_data = function() {
+		$http.get("podcasts/podcasts.json")
+		.success(function(response) {
+			temp_podcasts = response.podcasts;
+			angular.forEach(temp_podcasts, function(temp_podcast, temp_key){
+				var match_found = false;
+				angular.forEach($scope.podcasts, function(podcast, key){
+					if (match_found == false)
+					{
+						if (temp_podcast.md5 == podcast.md5)
+						{
+							match_found = true;
+						}
+					}
+				});
+				
+				if (match_found == false)
+				{
+					// Add the new podcast to the array
+					$scope.podcasts.push(temp_podcast);
+				}
+			});
+		});
+		angular.forEach($scope.podcasts, function(podcast, key){
+			$http.get("podcasts/podcast_data/" + podcast.md5 + ".json")
+			.success(function(response) {
+				temp_episodes = response.episodes;
+				angular.forEach(temp_episodes, function(temp_episode, temp_key){
+					var match_found = false;
+					angular.forEach(podcast.episodes, function(episode, key){
+						if (match_found == false)
+						{
+							if (episode.md5 == temp_episode.md5)
+							{
+								match_found = true;
+							}
+						}
+					});
+					
+					if (match_found == false)
+					{
+						podcast.episodes.unshift(temp_episode);
+					}
+				});
+			});
+		});
+	};
+	
+	$scope.load_data = function() { // Fast load for the first time
 		$http.get("podcasts/podcasts.json")
 		.success(function(response) {
 			$scope.podcasts = response.podcasts;
@@ -27,7 +75,27 @@ app.controller('myCtrl', function($scope, $http) {
 		});
 	};
 	
-	$scope.refresh_data();
+	$scope.load_data();
+	
+	$scope.delete_podcast = function(podcast){
+		if (confirm("Are you sure you want to delete this episode?")) {
+			$.ajax({
+				url: 'common.php',
+				data: {
+					action: 'delete_podcast',
+					podcast_md5: podcast.md5
+				},
+				type: 'post',
+				success: function(output) {
+					var index = $scope.podcasts.indexOf(podcast);
+					if (index > -1) {
+						$scope.podcasts.splice(index, 1);
+					}
+					$scope.$apply();
+				}
+			}); //Ajax call
+		}
+	};
 	
 	// Download an episode
 	$scope.download_episode = function(podcast, episode) {

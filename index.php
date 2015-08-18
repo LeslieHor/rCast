@@ -50,7 +50,7 @@
 					</li>
 					<li><a id="update_all" href="#" onclick="update_all_feeds()">Update All</a></li>
 					<li><a id="refresh_data" href="javascript:void(0);" ng-click="refresh_data()">REF</a></li>
-					<li><a id="testt" href="javascript:void(0);" onclick="test_function()">Vibration</a></li>
+					<li><a id="testt" href="javascript:void(0);" ng-click="test()">Test</a></li>
 				  </ul>
 				</div><!--/.nav-collapse -->
 			  </div>
@@ -65,6 +65,7 @@
 					</accordion-heading>
 					<div>
 						<button class="btn btn-default" ng-click="update_feed(podcast)"><span class="glyphicon glyphicon-refresh"></span></button>
+						<button class="btn btn-default" ng-click="delete_podcast(podcast)"><span class="glyphicon glyphicon-trash"></span></button>
 						{{ podcast.url }}
 					</div>
 					<accordion close-others="false">
@@ -73,7 +74,7 @@
 								{{ episode.title }}
 								
 								<!-- Change label according to the episode status -->
-								<span ng-class="{ 'label-info' : episode.status == 0 , 'label-warning' : episode.status == 1, 'label-success' : episode.status == 2, 'label-primary' : episode.status == 3, 'label-warning' : episode.status == 4, 'label-default' : episode.status == 5}" class="label">{{ episode.status | intToStatus }}</span>
+								<span ng-class="{ 'label-info' : episode.status == 0 , 'label-warning' : episode.status == 1, 'label-success' : episode.status == 2, 'label-primary' : episode.status == 3, 'label-danger' : episode.status == 4, 'label-default' : episode.status == 5}" class="label">{{ episode.status | intToStatus }}</span>
 							</accordion-heading>
 							<div>
 								<!-- Show podcast episode information -->
