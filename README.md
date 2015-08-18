@@ -1,5 +1,5 @@
-# Podcast Manager
-Podcast Manager is a cross-platform podcast manager. Downloading, playing and managing podcasts can all be done in here.
+# rCast
+rCast is a cross-platform podcast manager. Downloading, playing and managing podcasts can all be done in here.
 
 ## Used Libraries
 * SimplePIE (RSS feed interaction)
@@ -7,9 +7,9 @@ Podcast Manager is a cross-platform podcast manager. Downloading, playing and ma
 * AngularJS (For creating the app)
 
 ## Statuses
-1. Episode is not downloaded
-2. Downloading
-3. Downloded, not played
-4. Partially played, bookmark is set
-5. Episode finished
-6. Episode finished, and deleted.
+0. Episode is not downloaded
+1. Downloading
+2. Downloded, not played
+3. Partially played, bookmark is set
+4. Episode finished
+5. Episode finished, and deleted.
