@@ -114,6 +114,29 @@ app.controller('myCtrl', function($scope, $http) {
 		}); //Ajax call
 	}
 	
+	// Delete the episode
+	$scope.delete_episode = function(podcast, episode) {
+		$.ajax({
+			url: 'common.php',
+			data: {
+				action: 'delete_episode',
+				podcast_md5: podcast.md5,
+				episode_md5: episode.md5
+			},
+			type: 'post',
+			success: function(output) {
+				episode.status = 5;
+				$scope.$apply();
+			}
+		}); //Ajax call
+	}
+	
+	// Reset an episode back to status 0
+	$scope.reset_episode = function(podcast, episode){
+		
+	}
+	
+	// Save the time for the currently playing episode
 	$scope.save_time = function(){
 		var e = document.getElementById('audio_player');
 		var time = e.currentTime;
@@ -133,6 +156,7 @@ app.controller('myCtrl', function($scope, $http) {
 		}); //Ajax call
 	};
 	
+	// Save the time for a specific episode as given
 	$scope.save_time_specific = function(podcast, episode){
 		var e = document.getElementById('audio_player');
 		var time = e.currentTime;

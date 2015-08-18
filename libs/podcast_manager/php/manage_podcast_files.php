@@ -73,6 +73,45 @@ function finished_episode($podcast_md5, $episode_md5)
 	log_event("Finished setting as finished " . $podcast_md5 . ':' . $episode_md5);
 }
 
+function delete_episode($podcast_md5, $episode_md5)
+{
+	log_event("Deleting episode: " . $podcast_md5 . ':' . $episode_md5);
+	$path = $GLOBALS['podcast_data_path'] . $podcast_md5 . '.json';
+	$episodes = load_json_data($path);
+	foreach ($episodes['episodes'] as &$episode)
+	{
+		if (strcmp($episode['md5'], $episode_md5) == 0)
+		{
+			$local_episode_path = $GLOBALS['podcast_file_path'] .  $episode['local_path'];
+			if (file_exists($local_episode_path))
+			{
+				log_event("Episode file found. Deleting: ". $local_episode_path);
+				try
+				{
+					unlink($local_episode_path);
+				}
+				catch (Exception $e)
+				{
+					log_event("Delete failed: " . $e);
+				}
+			}
+			else
+			{
+				log_event("Episode does not exist");
+			}
+			
+			log_event("Episode deleted. Setting status to 5, local url to null and bookmark to 0");
+			$episode['local_path'] = '';
+			$episode['status'] = 5;
+			$episode['bookmark'] = 0;
+			log_event("Saving updating podcast episode information");
+			save_json_data($episodes, $path);
+			log_event("Saved");
+		}
+	}
+	log_event("Finished deleting episode: " . $podcast_md5 . ':' . $episode_md5);
+}
+
 function get_podcast_name($feed_md5)
 {
 	$podcasts = load_json_data($GLOBALS['podcasts_head_file']);

@@ -73,7 +73,7 @@
 								{{ episode.title }}
 								
 								<!-- Change label according to the episode status -->
-								<span ng-class="{ 'label-info' : episode.status == 0 , 'label-warning' : episode.status == 1, 'label-success' : episode.status == 2, 'label-primary' : episode.status == 3, 'label-default' : episode.status == 4}" class="label">{{ episode.status | intToStatus }}</span>
+								<span ng-class="{ 'label-info' : episode.status == 0 , 'label-warning' : episode.status == 1, 'label-success' : episode.status == 2, 'label-primary' : episode.status == 3, 'label-warning' : episode.status == 4, 'label-default' : episode.status == 5}" class="label">{{ episode.status | intToStatus }}</span>
 							</accordion-heading>
 							<div>
 								<!-- Show podcast episode information -->
@@ -83,13 +83,16 @@
 								
 								<div class="description"><small>{{ episode.description }}</small></div>
 								
-								<!-- Buttons to show on status 0 (not downloaded) -->
-								<button ng-class="{ 'hide' : episode.local_path.length > 0 }" class="btn btn-default" ng-click="download_episode(podcast, episode)"><span class="glyphicon glyphicon-download-alt"></span></button>
+								<!-- Buttons to show on status between 0 and 1 (not downloaded or downloading) -->
+								<button ng-class="{ 'hide' : !(episode.status >= 0 && episode.status <= 1) }" class="btn btn-default" ng-click="download_episode(podcast, episode)"><span class="glyphicon glyphicon-download-alt"></span></button>
 								
-								<!-- Buttons to show on status > 0 (downloaded) -->
-								<button ng-class="{ 'hide' : episode.local_path.length == 0 }" class="btn btn-default" ng-click="play_episode(podcast, episode)"><span class="glyphicon glyphicon-play"></span></button>
-								<button ng-class="{ 'hide' : episode.local_path.length == 0 }" class="btn btn-default" ng-click="save_time()"><span class="glyphicon glyphicon-time"></span></button>
-								<button ng-class="{ 'hide' : episode.local_path.length == 0 }" class="btn btn-default" ng-click=""><span class="glyphicon glyphicon-trash"></span></button>
+								<!-- Buttons to show on status between 2 and 4 (downloaded, in progress, or finished) -->
+								<button ng-class="{ 'hide' : !(episode.status >= 2 && episode.status <= 4) }" class="btn btn-default" ng-click="play_episode(podcast, episode)"><span class="glyphicon glyphicon-play"></span></button>
+								<button ng-class="{ 'hide' : !(episode.status >= 2 && episode.status <= 4) }" class="btn btn-default" ng-click="save_time()"><span class="glyphicon glyphicon-time"></span></button>
+								<button ng-class="{ 'hide' : !(episode.status >= 2 && episode.status <= 4) }" class="btn btn-default" ng-click="delete_episode(podcast, episode)"><span class="glyphicon glyphicon-trash"></span></button>
+								
+								<!-- Buttons to show on status 5 (deleted) -->
+								<button ng-class="{ 'hide' : !(episode.status == 5) }" class="btn btn-default" ng-click="reset_episode(podcast, episode)"><span class="glyphicon glyphicon-repeat"></span></button>
 								
 								<!-- Debug button -->
 								<button class="btn btn-default" ng-click="debug(episode)"><span class="glyphicon glyphicon-info-sign"></span></button>
