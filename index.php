@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html id="head_html" lang="en"  ng-app="myApp" ng-controller="myCtrl">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 
-    <title>rCast</title>
+    <title>{{ name }} v{{ version }}</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -24,7 +24,7 @@
 
   <body>
 	<div class="container">
-		<div id="main-content"" class="main-content" ng-app="myApp" ng-controller="myCtrl" >
+		<div id="main-content" class="main-content">
 		
 			<!-- Navigation bar -->
 			<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -36,7 +36,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				  </button>
-				  <a class="navbar-brand" href="#">rCast</a>
+				  <a class="navbar-brand" href="#">{{ name }}</a>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 				  <ul class="nav navbar-nav">

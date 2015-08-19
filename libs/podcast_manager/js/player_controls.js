@@ -63,7 +63,7 @@ function togglePlayState()
 function save_time()
 {
 	// Save the time
-	var scope = angular.element("#main-content").scope();
+	var scope = angular.element("#head_html").scope();
 	scope.$apply(function(){
 		scope.save_time();
     })

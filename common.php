@@ -7,10 +7,12 @@ error_reporting(-1);
 ini_set("memory_limit","512M");
 
 $root_path = getcwd() . '/';
-$podcast_file_path = $root_path . 'podcasts/podcast_files/';
-$podcast_data_path = $root_path . 'podcasts/podcast_data/';
-$podcasts_head_file = $root_path . 'podcasts/podcasts.json';
-$episode_limit = 30;
+$podcast_file_path = '';
+$podcast_data_path = '';
+$podcasts_head_file = '';
+$episode_limit = 0;
+
+load_settings();
 
 // Loading in simplepie
 include_once($root_path . '/libs/simplepie/autoloader.php');
@@ -49,6 +51,17 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
 		case 'reset_episode' : reset_episode($_POST['podcast_md5'], $_POST['episode_md5']);break;
 		case 'delete_podcast' : delete_podcast($_POST['podcast_md5']);break;
 	}
+}
+
+// Load in the settings from the settings.json
+function load_settings()
+{
+	$settings = load_json_data($GLOBALS['root_path'] . 'settings.json');
+	
+	$GLOBALS['podcast_file_path'] = $settings['podcast_file_path'];
+	$GLOBALS['podcast_data_path'] = $settings['podcast_data_path'];
+	$GLOBALS['podcasts_head_file'] = $settings['podcasts_head_file'];
+	$GLOBALS['episode_limit'] = $settings['episode_limit'];
 }
 
 // Log the event in the logs folder

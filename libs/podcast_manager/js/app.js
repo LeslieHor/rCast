@@ -28,8 +28,22 @@ app.controller('myCtrl', function($scope, $http) {
 		$('#footer').addClass("collapse");
 	}
 	
+	// Loads the settings file and calls the initial load_data function
+	$scope.load_settings = function() {
+		$http.get("settings.json")
+		.success(function(response) {
+			$scope.name = response.name;
+			$scope.version = response.version;
+			$scope.podcast_file_path = response.podcast_file_path;
+			$scope.podcast_data_path = response.podcast_data_path;
+			$scope.podcasts_head_file = response.podcasts_head_file;
+			$scope.load_data();
+		});
+		
+	};
+	
 	$scope.refresh_data = function() {
-		$http.get("podcasts/podcasts.json")
+		$http.get($scope.podcasts_head_file)
 		.success(function(response) {
 			temp_podcasts = response.podcasts;
 			angular.forEach(temp_podcasts, function(temp_podcast, temp_key){
@@ -57,7 +71,7 @@ app.controller('myCtrl', function($scope, $http) {
 				podcast.episodes = [];
 			}
 			
-			$http.get("podcasts/podcast_data/" + podcast.md5 + ".json")
+			$http.get($scope.podcast_data_path + podcast.md5 + ".json")
 			.success(function(response) {
 				temp_episodes = response.episodes;
 				var episode_counter = 0;
@@ -84,12 +98,12 @@ app.controller('myCtrl', function($scope, $http) {
 	};
 	
 	$scope.load_data = function() { // Fast load for the first time
-		$http.get("podcasts/podcasts.json")
+		$http.get($scope.podcasts_head_file)
 		.success(function(response) {
 			$scope.podcasts = response.podcasts;
 			
 			angular.forEach($scope.podcasts, function(podcast, key){
-				$http.get("podcasts/podcast_data/" + podcast.md5 + ".json",  { headers: { 'Cache-Control' : 'no-cache' } })
+				$http.get($scope.podcast_data_path + podcast.md5 + ".json",  { headers: { 'Cache-Control' : 'no-cache' } })
 				.success(function(response) {
 					// Pass the data to the master array
 					podcast.episodes = response.episodes;
@@ -97,8 +111,6 @@ app.controller('myCtrl', function($scope, $http) {
 			});
 		});
 	};
-	
-	$scope.load_data();
 	
 	$scope.delete_podcast = function(podcast){
 		if (confirm("Are you sure you want to delete this episode?")) {
@@ -132,7 +144,7 @@ app.controller('myCtrl', function($scope, $http) {
 			},
 			type: 'post',
 			success: function(output) {
-				$http.get("podcasts/podcast_data/" + podcast.md5 + ".json")
+				$http.get($scope.podcast_data_path + podcast.md5 + ".json")
 				.success(function(response) {
 					// Pass the data to the master array
 					episode.status = 2;
@@ -155,7 +167,7 @@ app.controller('myCtrl', function($scope, $http) {
 		$scope.set_status(podcast, episode, status);
 		
 		var e = document.getElementById('audio_player');
-		e.src = 'podcasts/podcast_files/' + episode.local_path;
+		e.src = $scope.podcast_file_path + episode.local_path;
 		
 		$('#player_bar').attr('max', episode.total_time);
 		
@@ -326,6 +338,7 @@ app.controller('myCtrl', function($scope, $http) {
 		
 	}
 	
+	$scope.load_settings();
 });
 
 app.filter('secondsToDateTime', [function() {

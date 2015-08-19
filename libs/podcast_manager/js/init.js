@@ -22,7 +22,7 @@ function update_feed(){
 		},
 		type: 'post',
 		success: function(output) {
-			var scope = angular.element("#main-content").scope();
+			var scope = angular.element("#head_html").scope();
 			scope.refresh_data();
 		}
 	}); //Ajax call
@@ -37,7 +37,7 @@ function update_all_feeds(){
 		type: 'post',
 		success: function(output) {
 			alert("done");
-			var scope = angular.element("#main-content").scope();
+			var scope = angular.element("#head_html").scope();
 			scope.$apply();
 		}
 	}); //Ajax call

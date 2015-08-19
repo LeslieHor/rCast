@@ -1,0 +1,8 @@
+{
+	"name":"rCast",
+	"version":0.1,
+	"podcast_file_path":"podcasts/podcast_files/",
+	"podcast_data_path":"podcasts/podcast_data/",
+	"podcasts_head_file":"podcasts/podcasts.json",
+	"episode_limit":30
+}
