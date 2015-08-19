@@ -132,7 +132,6 @@ app.controller('myCtrl', function($scope, $http) {
 			},
 			type: 'post',
 			success: function(output) {
-				alert(output);
 				$http.get("podcasts/podcast_data/" + podcast.md5 + ".json")
 				.success(function(response) {
 					// Pass the data to the master array

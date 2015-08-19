@@ -20,7 +20,6 @@ function download_episode($feed_md5, $episode_md5)
 			$episode['status'] = 1;
 			save_json_data($episodes, $path);
 			log_event("Downloading: " . $episode_md5 . "-" . $episode['download_url']);
-			$episode_file = file_get_contents($episode['download_url']);
 			
 			$directory = $GLOBALS['podcast_file_path'] . $podcast_folder;
 			if (!is_dir($directory)) {
@@ -28,7 +27,13 @@ function download_episode($feed_md5, $episode_md5)
 				mkdir($directory);
 			}
 			
-			file_put_contents($local_path, $episode_file);
+			// Download the file if it doesn't exist
+			if (!is_file($local_path))
+			{
+				$episode_file = file_get_contents($episode['download_url']);
+				file_put_contents($local_path, $episode_file);
+			}
+			
 			log_event("Episode saved: " . $episode_md5 . "-" . $local_path);
 			
 			$episode['local_path'] = $podcast_folder . '/' . $filename . '.' . $extension;
