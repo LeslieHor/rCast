@@ -5,6 +5,7 @@ rCast is a cross-platform podcast manager. Downloading, playing and managing pod
 * SimplePIE (RSS feed interaction)
 * Bootstrap (Mobile UI)
 * AngularJS (For creating the app)
+* Angular UI Bootstrap (integration of bootstrap and angular)
 
 ## Statuses
 0: Episode is not downloaded  
