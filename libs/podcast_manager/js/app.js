@@ -60,6 +60,7 @@ app.controller('myCtrl', function($scope, $http) {
 			$http.get("podcasts/podcast_data/" + podcast.md5 + ".json")
 			.success(function(response) {
 				temp_episodes = response.episodes;
+				var episode_counter = 0;
 				angular.forEach(temp_episodes, function(temp_episode, temp_key){
 					var match_found = false;
 					angular.forEach(podcast.episodes, function(episode, key){
@@ -74,7 +75,8 @@ app.controller('myCtrl', function($scope, $http) {
 					
 					if (match_found == false)
 					{
-						podcast.episodes.unshift(temp_episode);
+						(podcast.episodes).splice(episode_counter, 0, temp_episode);
+						episode_counter++;
 					}
 				});
 			});
