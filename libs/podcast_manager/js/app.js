@@ -8,8 +8,24 @@ app.controller('myCtrl', function($scope, $http) {
 	$scope.current_time = 0;
 	$scope.total_time = 0;
 	
-	$scope.test = function() {
-		alert($scope);
+	$scope.toggle_footer = function() {
+		// Toggle the status of the footer.
+		if ($('#footer').hasClass("collapse"))
+		{
+			$scope.show_footer();
+		}
+		else
+		{
+			$scope.hide_footer();
+		}
+	}
+	
+	$scope.show_footer = function() {
+		$('#footer').removeClass("collapse");
+	}
+	
+	$scope.hide_footer = function() {
+		$('#footer').addClass("collapse");
 	}
 	
 	$scope.refresh_data = function() {
@@ -146,6 +162,7 @@ app.controller('myCtrl', function($scope, $http) {
 		$scope.current_track = episode.title;
 		
 		$scope.load_time(episode);
+		$scope.show_footer();
 		
 		play();
 	};

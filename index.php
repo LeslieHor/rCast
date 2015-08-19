@@ -54,6 +54,7 @@
 					</li>
 					<li><a id="update_all" href="#" onclick="update_all_feeds()">Update All</a></li>
 					<li><a id="refresh_data" href="javascript:void(0);" ng-click="refresh_data()">Refresh data</a></li>
+					<li><a href="#" ng-click="toggle_footer()">Toggle Footer</a></li>
 					<li><a id="git" href="http://git.rdlh.me/leslie/rcast">Git</a></li>
 				  </ul>
 				</div><!--/.nav-collapse -->
@@ -125,9 +126,12 @@
 				</accordion-group>
 			  </accordion>
 			</div>
-	
+			
+			<div>
+				
+			</div>
 			<!-- Footer containing the audio player -->
-			<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+			<nav id="footer" class="navbar navbar-default navbar-fixed-bottom collapse" role="navigation">
 				<div class="container">
 				<!-- Floating player controls at the botttom of the page -->
 					<div class="player_container">
@@ -157,6 +161,7 @@
 							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
 								<li><a href="#" onclick="toggle_audio_control_visibility()">Toggle Player</a></li>
 								<li><a href="#" onclick="toggle_player_information_visibility()">Toggle Info</a></li>
+								<li><a href="#" ng-click="hide_footer()">Hide footer</a></li>
 							  </ul>
 							</div>
 					
