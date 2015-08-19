@@ -1,8 +1,4 @@
 <?php
-// http://feed.thisamericanlife.org/talpodcast?format=xml
-// http://feeds.wnyc.org/radiolab
-// http://resources.h9blog.com/podcast-feeds/h9cast
-
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(-1);
