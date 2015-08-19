@@ -202,17 +202,22 @@ app.controller('myCtrl', function($scope, $http) {
 		e.currentTime = episode.bookmark;
 	}
 	
-	$scope.finished_episode = function() {
+	$scope.finished_episode_current_track = function(){
+		$scope.finished_episode($scope.podcast, $scope.episode);
+	}
+	
+	$scope.finished_episode = function(podcast, episode) {
 		$.ajax({
 			url: 'common.php',
 			data: {
 				action: 'finished_episode',
-				podcast_md5: $scope.podcast.md5,
-				episode_md5: $scope.episode.md5
+				podcast_md5: podcast.md5,
+				episode_md5: episode.md5
 			},
 			type: 'post',
 			success: function(output) {
-				$scope.episode.status = 4;
+				episode.status = 4;
+				$scope.$apply();
 			}
 		}); //Ajax call
 	}

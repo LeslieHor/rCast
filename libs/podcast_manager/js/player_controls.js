@@ -21,7 +21,7 @@ function update_time()
 		
 		if ((e.currentTime > (e.duration - 15)) && (scope.episode['status'] < 4))
 		{
-			scope.finished_episode();
+			scope.finished_episode_current_track();
 		}
 		else if (current_time < (e.currentTime - 10))
 		{

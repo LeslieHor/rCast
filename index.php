@@ -111,7 +111,7 @@
 								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options<span class="caret"></span>
 								  </button>
 								  <ul class="dropdown-menu">
-									<li><a href="#" onclick="alert('Not working')">Set as finished</a></li>
+									<li><a href="#" ng-click="finished_episode(podcast, episode)">Set as finished</a></li>
 									<li><a href="#" onclick="alert('Not working')">Set as downloaded</a></li>
 									<li><a href="#" ng-click="load_time(episode)">Load Time</a></li>
 									<li><a href="#" onclick="alert('Not working')">Delete</a></li>
