@@ -43,14 +43,18 @@
 					<li>
 						<form class="navbar-form navbar-left" role="group">
 							<div class="form-group">
-								<input id="feed_url" type="text" class="form-control" placeholder="Podcast URL">
+								<div class="input-group">
+									<input id="feed_url" type="text" class="form-control" placeholder="Podcast URL">
+									<span class="input-group-btn">
+										<button type="add" class="btn btn-default" onclick="update_feed()"><span class="glyphicon glyphicon-plus"></span></button>
+									</span>
+								</div>
 							</div>
-							<button type="add" class="btn btn-default" onclick="update_feed()"><span class="glyphicon glyphicon-plus"></span></button>
 						</form>
 					</li>
 					<li><a id="update_all" href="#" onclick="update_all_feeds()">Update All</a></li>
-					<li><a id="refresh_data" href="javascript:void(0);" ng-click="refresh_data()">REF</a></li>
-					<li><a id="testt" href="javascript:void(0);" ng-click="test()">Test</a></li>
+					<li><a id="refresh_data" href="javascript:void(0);" ng-click="refresh_data()">Refresh data</a></li>
+					<li><a id="git" href="http://git.rdlh.me/leslie/rcast">Git</a></li>
 				  </ul>
 				</div><!--/.nav-collapse -->
 			  </div>
@@ -58,16 +62,22 @@
 			
 			<!-- Lists all the podcasts and their shows -->
 			<div class="centre_panel">
+				<!-- Accordion to contain all the podcasts -->
 			  <accordion close-others="true">
 				<accordion-group ng-repeat="podcast in podcasts">
 					<accordion-heading ng-click="load_episodes(podcast)">
 						{{podcast.name}} <span class="badge">{{ (podcast.episodes).length }}</span>
 					</accordion-heading>
 					<div>
-						<button class="btn btn-default" ng-click="update_feed(podcast)"><span class="glyphicon glyphicon-refresh"></span></button>
-						<button class="btn btn-default" ng-click="delete_podcast(podcast)"><span class="glyphicon glyphicon-trash"></span></button>
-						{{ podcast.url }}
+						<div>
+							<button class="btn btn-default" ng-click="update_feed(podcast)"><span class="glyphicon glyphicon-refresh"></span></button>
+							<button class="btn btn-default" ng-click="delete_podcast(podcast)"><span class="glyphicon glyphicon-trash"></span></button>
+							<button class="btn btn-default" ng-click="debug(podcast)"><span class="glyphicon glyphicon-info-sign"></span></button>
+						</div>
+						<br>
 					</div>
+					
+					<!-- Accordion to contain all the episodes -->
 					<accordion close-others="false">
 						<accordion-group ng-repeat="episode in podcast.episodes" >
 							<accordion-heading>
@@ -96,8 +106,7 @@
 								
 								<!-- Overflow menu -->
 								<div class="btn-group dropup">
-								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Options <span class="caret"></span>
+								  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options<span class="caret"></span>
 								  </button>
 								  <ul class="dropdown-menu">
 									<li><a href="#" onclick="alert('Not working')">Set as finished</a></li>
