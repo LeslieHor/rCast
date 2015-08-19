@@ -7,9 +7,9 @@ rCast is a cross-platform podcast manager. Downloading, playing and managing pod
 * AngularJS (For creating the app)
 
 ## Statuses
-0. Episode is not downloaded
-1. Downloading
-2. Downloded, not played
-3. Partially played, bookmark is set
-4. Episode finished
-5. Episode finished, and deleted.
+0: Episode is not downloaded  
+1: Downloading  
+2: Downloded, not played  
+3: Partially played, bookmark is set  
+4: Episode finished  
+5: Episode finished, and deleted  
