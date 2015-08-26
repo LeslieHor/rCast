@@ -30,7 +30,7 @@ app.controller('myCtrl', function($scope, $http) {
 	
 	// Loads the settings file and calls the initial load_data function
 	$scope.load_settings = function() {
-		$http.get("settings.json")
+		$http.get("settings.json" + '?id=' + new Date().getTime())
 		.success(function(response) {
 			$scope.name = response.name;
 			$scope.version = response.version;
@@ -43,7 +43,7 @@ app.controller('myCtrl', function($scope, $http) {
 	};
 	
 	$scope.refresh_data = function() {
-		$http.get($scope.podcasts_head_file)
+		$http.get($scope.podcasts_head_file + '?id=' + new Date().getTime())
 		.success(function(response) {
 			temp_podcasts = response.podcasts;
 			angular.forEach(temp_podcasts, function(temp_podcast, temp_key){
@@ -71,7 +71,7 @@ app.controller('myCtrl', function($scope, $http) {
 				podcast.episodes = [];
 			}
 			
-			$http.get($scope.podcast_data_path + podcast.md5 + ".json")
+			$http.get($scope.podcast_data_path + podcast.md5 + ".json" + '?id=' + new Date().getTime())
 			.success(function(response) {
 				temp_episodes = response.episodes;
 				var episode_counter = 0;
@@ -98,12 +98,12 @@ app.controller('myCtrl', function($scope, $http) {
 	};
 	
 	$scope.load_data = function() { // Fast load for the first time
-		$http.get($scope.podcasts_head_file)
+		$http.get($scope.podcasts_head_file + '?id=' + new Date().getTime())
 		.success(function(response) {
 			$scope.podcasts = response.podcasts;
 			
 			angular.forEach($scope.podcasts, function(podcast, key){
-				$http.get($scope.podcast_data_path + podcast.md5 + ".json",  { headers: { 'Cache-Control' : 'no-cache' } })
+				$http.get($scope.podcast_data_path + podcast.md5 + ".json" + '?id=' + new Date().getTime())
 				.success(function(response) {
 					// Pass the data to the master array
 					podcast.episodes = response.episodes;
@@ -144,7 +144,7 @@ app.controller('myCtrl', function($scope, $http) {
 			},
 			type: 'post',
 			success: function(output) {
-				$http.get($scope.podcast_data_path + podcast.md5 + ".json")
+				$http.get($scope.podcast_data_path + podcast.md5 + ".json" + '?id=' + new Date().getTime())
 				.success(function(response) {
 					// Pass the data to the master array
 					episode.status = 2;
