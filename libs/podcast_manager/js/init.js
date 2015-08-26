@@ -22,6 +22,10 @@ function update_feed(){
 		},
 		type: 'post',
 		success: function(output) {
+			if (!output)
+			{
+				alert("This is an invalid podcast feed");
+			}
 			var scope = angular.element("#head_html").scope();
 			scope.refresh_data();
 		}

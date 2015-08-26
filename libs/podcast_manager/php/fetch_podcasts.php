@@ -31,6 +31,12 @@ function episode($item){
 
 function update_feed($feed_url)
 {
+	if (!is_valid_feed($feed_url))
+	{
+		echo false;
+		return;
+	}
+	
 	$feed_xml = load_feed_xml($feed_url);
 	$feed_md5 = md5($feed_url);
 	$path = $GLOBALS['podcast_data_path'] . $feed_md5 . '.json';
@@ -98,6 +104,45 @@ function update_feed($feed_url)
 	
 	save_json_data($save_item, $path);
 	return;
+}
+
+// Checks if the feed is a valid podcast feed
+function is_valid_feed($feed_url)
+{
+	// Load in the document as a simplepie object
+	$feed_xml = load_feed_xml($feed_url);
+	
+	// If the feed has any errors, return false
+	if ($feed_xml->error())
+	{
+		return false;
+	}
+	
+	// Get the number of feed items in the feed
+	$episode_count = $feed_xml->get_item_quantity();
+	
+	// Get the first feed item
+	$episode = $feed_xml->get_item();
+
+	// See if the first feed item has any media to download
+	$enclosure = $episode->get_enclosure();
+	$download_url = $enclosure->get_link();
+	$total_time = $enclosure->get_duration();
+	
+	// Set the validity flags
+	$valid_episode_count = $episode_count > 0;
+	$valid_download_url = strlen($download_url) > 0;
+	$valid_total_time = $total_time > 0;
+	
+	// All flags must be true to be a valid podcast feed
+	if ($valid_episode_count && $valid_download_url && $valid_total_time)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 function episode_exists($episodes, $podcasts)
