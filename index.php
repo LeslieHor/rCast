@@ -57,7 +57,6 @@
 					<li><a id="refresh_data" href="javascript:void(0);" ng-click="refresh_data()">Refresh data</a></li>
 					<li><a href="#" ng-click="toggle_footer()">Toggle Footer</a></li>
 					<li><a id="git" href="http://git.rdlh.me/leslie/rcast">Git</a></li>
-					<li><a id="git" ng-click="delete_cache()">Delete cache</a></li>
 				  </ul>
 				</div><!--/.nav-collapse -->
 			  </div>
